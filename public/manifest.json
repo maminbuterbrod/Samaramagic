@@ -1,0 +1,20 @@
+{
+  "name": "Центр Исида",
+  "short_name": "Исида",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#010101",
+  "theme_color": "#010101",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/60dQWqN1/IMG-2511.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://i.ibb.co/60dQWqN1/IMG-2511.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
