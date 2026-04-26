@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'motion/react';
+import { Routes, Route, Link } from 'react-router-dom';
 import { Menu, X, Calendar, ArrowRight, Instagram, Send, Flame, Sparkles, Gem, Moon, GraduationCap, Compass } from 'lucide-react';
+import AboutMe from './pages/AboutMe';
 
 const directions = [
   {
@@ -91,7 +93,7 @@ function TwinklingStars() {
   );
 }
 
-function ImmersiveBackground() {
+export function ImmersiveBackground() {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 5000], ["0%", "-15%"]);
 
@@ -113,7 +115,7 @@ function ImmersiveBackground() {
   );
 }
 
-function Navbar() {
+export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -160,7 +162,7 @@ function Navbar() {
               { id: 'testimonials', label: 'Отзывы' },
               { id: 'contact', label: 'Запись' }
             ].map((item) => (
-              <a key={item.id} href={`#${item.id}`} className="hover:text-white hover:text-glow-gold transition-all duration-300 relative group">
+              <a key={item.id} href={`/#${item.id}`} className="hover:text-white hover:text-glow-gold transition-all duration-300 relative group">
                 <span className="relative z-10">{item.label}</span>
                 <span className="absolute -bottom-2 left-0 w-full h-[1px] bg-gold-500/0 group-hover:bg-gold-500/50 transition-all duration-500 transform scale-x-0 group-hover:scale-x-100 origin-left"></span>
               </a>
@@ -197,7 +199,7 @@ function Navbar() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 key={item.id} 
-                href={`#${item.id}`} 
+                href={`/#${item.id}`} 
                 onClick={() => setIsOpen(false)}
                 className="py-5 text-sm font-medium uppercase tracking-[0.25em] text-zinc-300 hover:text-white border-b border-white/5 last:border-0 flex items-center justify-between group active:text-gold-400"
               >
@@ -341,13 +343,13 @@ function About() {
             </div>
           </div>
 
-          <button className="mt-10 group relative overflow-hidden rounded-full glass-card-premium chrome-edge px-8 py-4 w-fit flex items-center gap-4">
+          <Link to="/about-me" className="mt-10 group relative overflow-hidden rounded-full glass-card-premium chrome-edge px-8 py-4 w-fit flex items-center gap-4">
             <span className="text-[10px] uppercase font-body font-semibold tracking-[0.2em] relative z-10 text-white">Узнать мою историю подробнее</span>
             <span className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center relative z-10 group-hover:bg-white group-hover:text-black transition-colors duration-500">
               <ArrowRight size={12} strokeWidth={2} />
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-gold-500/0 via-gold-500/10 to-gold-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"></div>
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>
@@ -482,7 +484,7 @@ function ContactSection() {
   );
 }
 
-function Footer() {
+export function Footer() {
   return (
     <footer className="relative w-full z-10 py-12 md:py-24 overflow-hidden border-t border-white/5 bg-[#010101]">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(212,175,55,0.05)_0%,_transparent_50%)] pointer-events-none"></div>
@@ -516,7 +518,7 @@ function Footer() {
   );
 }
 
-export default function App() {
+function Home() {
   return (
     <div className="min-h-screen flex flex-col relative w-full overflow-x-hidden pt-safe pb-[80px] md:pb-0">
       <ImmersiveBackground />
@@ -532,6 +534,15 @@ export default function App() {
       
       <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about-me" element={<AboutMe />} />
+    </Routes>
   );
 }
 
